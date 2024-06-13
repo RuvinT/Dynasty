@@ -12,9 +12,128 @@
     <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
     <!-- Include chess.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: row;
+        }
+        #board {
+            width: 800px;
+        }
+        #rightPanel {
+            margin-left: 20px;
+            width: 400px;
+        }
+        #moveTimes {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        #moveTimes h3 {
+            text-align: center;
+            color: #333;
+        }
+        #timesList {
+            list-style-type: none;
+            padding: 0;
+            font-size: 18px;
+        }
+        #timesList li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        .dropdown-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .dropdown-container select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .radio-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .radio-buttons label {
+            margin-right: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .radio-buttons label input[type="radio"] {
+            margin-right: 5px;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <div id="board" style="width: 800px"></div>
+    <div id="container">
+        <div id="board"></div>
+        <div id="rightPanel">
+            <div class="radio-buttons">
+                <label>Color:</label>
+                <label>
+                    <input type="radio" name="color" value="white" checked>
+                    White
+                </label>
+                <label>
+                    <input type="radio" name="color" value="black">
+                    Black
+                </label>
+            </div>
+            <div class="radio-buttons">
+                <label>Game Type:</label>
+                <label>
+                    <input type="radio" name="gameType" value="blitz" checked>
+                    Blitz
+                </label>
+                <label>
+                    <input type="radio" name="gameType" value="rapid">
+                    Rapid
+                </label>
+                <label>
+                    <input type="radio" name="gameType" value="classical">
+                    Classical
+                </label>
+            </div>
+            <div class="dropdown-container">
+                <h3>Choose Grandmaster</h3>
+                <select id="grandmaster">
+                    <option value="Magnus Carlsen">Magnus Carlsen</option>
+                    <option value="Garry Kasparov">Garry Kasparov</option>
+                    <option value="Bobby Fischer">Bobby Fischer</option>
+                    <option value="Vishy Anand">Vishy Anand</option>
+                    <option value="Hikaru Nakamura">Hikaru Nakamura</option>
+                </select>
+            </div>
+            <div id="moveTimes">
+                <h3>Move Times</h3>
+                <ul id="timesList">
+                    <li>e4: 10s</li>
+                    <li>e5: 15s</li>
+                    <li>Nf3: 8s</li>
+                    <li>Nc6: 12s</li>
+                    <li>Bb5: 20s</li>
+                    <li>a6: 25s</li>
+                    <li>Ba4: 18s</li>
+                    <li>Nf6: 22s</li>
+                    <li>O-O: 30s</li>
+                    <li>Be7: 28s</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <!-- Include custom JavaScript file -->
     <script src="app.js"></script>
 </body>
