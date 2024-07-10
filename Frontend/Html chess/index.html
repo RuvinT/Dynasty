@@ -49,7 +49,332 @@
             border: 1px solid #ccc;
         }
         .dropdown-container {
+            margin-bottom: 20px;<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynasty</title>
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include chessboard.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.css"
+        integrity="sha384-47VeTDpmy4yT21gKPXQcLQYQZwlmz27gEH5NTrOmTk3G/SGvMyltclOW/Q8uE+sL" crossorigin="anonymous">
+    <!-- Include chessboard.js JavaScript -->
+    <script src="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.js"
+        integrity="sha384-/KwQCjA1GWovZNV3QDVtvSMDzO4reGgarF/RqHipr7hIUElH3r5zNl9WEPPOBRIF"
+        crossorigin="anonymous"></script>
+    <!-- Include chess.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <!-- Include SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Include SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        #boardContainer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+           
+
+        }
+
+        #board {
+            width: 100%;
+            height: 50%;
+        }
+
+        #moveEvaluations {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #moveEvaluationsText {
+            text-align: left;
+            color: #333;
+            margin-bottom: -30px;
+            font-weight: bold;
+        }
+
+        #moveEvaluationsText span {
+            padding-right: 15px;
+            /* Adjust as needed */
+        }
+
+        #evaluationsList {
+            list-style-type: none;
+            padding: 0px;
+            font-size: 14px;
+            height: 45vh;
+            /* Set a maximum height for the list */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+        }
+
+        #evaluationsList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .progress-container {
+            width: 70%;
+            margin-left: 10px;
+            border: 1px solid #000;
+            /* Border for progress bar */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 15px;
+            background-color: #4caf50;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .progress-bar span {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: #080808;
+        }
+
+        .dropdown-container {
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .dropdown-container select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .radio-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .radio-buttons label {
+            margin-right: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .radio-buttons label input[type="radio"] {
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        #buttonContainer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            /* Add space between the buttons */
+            margin-bottom: 20px;
+            /* Add margin at the bottom of the container */
+        }
+
+        #togglePlayButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #030004;
+            border-radius: 4px;
+            background-color: #e413cc;
+            cursor: pointer;
+        }
+
+        #togglePlayButton:hover {
+            background-color: #10ea1b;
+        }
+
+        #revertButtonContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #revertMoveButton,
+        #moveForwardButton,
+        #flipButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        #revertMoveButton:hover,
+        #moveForwardButton:hover 
+        #flipButton:hover{
+            background-color: #e9e9e9;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: left;
+            margin: 10px;
+        }
+
+        .player-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .player-info-span {
+            font-size: 15px;
+            font-weight: bold;
+            width:50%;
+            margin-right: 50px;
+            align-items: center;
+            margin-top: 5px;
+            
+        }
+
+        .captured-pieces {
+            
+            height: 40px;
+            width: 100%;
+            background-color: lightgray; /* Added to make the container visible */
+            border: 1px solid black; /* Added to make the container visible */
+        }
+
+        .captured-pieces img {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+        }
+
+        #topTimer,
+        #bottomTimer {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
+            margin: 5px 0;
+        }
+       
+
+    </style>
+</head>
+
+<body>
+  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div id="boardContainer" class="d-flex flex-column align-items-center">
+                    <div id="playerTop" class="player-info">
+                        <img src="top-player-image.jpg" alt="Top Player Image" id="topPlayerImage">
+                        <div  id="topPlayerName" class="player-info-span">Magnus Carlsen</div>
+                        <div id="topTimer" style="margin-left: 1px;">00:00</div>  
+                    </div>
+                    <div id="capturedPiecesTop" class="captured-pieces"></div>
+                    <div id="board"></div>
+                    <div id="capturedPiecesBottom" class="captured-pieces"></div>
+                    <div id="playerBottom" class="player-info">
+                        <img src="bottom-player-image.jpg" alt="Bottom Player Image" id="bottomPlayerImage">
+                        <div id="bottomPlayerName" class="player-info-span">Player</div>
+                        <div id="bottomTimer" style="margin-left: 1px;">00:00</div>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="radio-buttons">
+                    <label>Color:</label>
+                    <label>
+                        <input type="radio" name="color" value="white" checked>
+                        White
+                    </label>
+                    <label>
+                        <input type="radio" name="color" value="black">
+                        Black
+                    </label>
+                </div>
+                <div class="radio-buttons">
+                    <label>Game Type:</label>
+                    <label>
+                        <input type="radio" name="gameType" value="classical" checked>
+                        Classical
+                    </label>
+                    <label>
+                        <input type="radio" name="gameType" value="rapid">
+                        Rapid
+                    </label>
+                    <label>
+                        <input type="radio" name="gameType" value="blitz">
+                        Blitz
+                    </label>
+                </div>
+                <div class="dropdown-container">
+                    <h3>Choose Grandmaster</h3>
+                    <select id="grandmaster">
+                        <option value="Magnus Carlsen">Magnus Carlsen</option>
+                        <option value="Hikaru Nakamura">Hikaru Nakamura</option>
+                        <option value="Garry Kasparov">Garry Kasparov</option>
+                        <option value="Fabiano Caruana">Fabiano Caruana</option>
+                        <option value="Arjun Erigaisi">Arjun Erigaisi</option>
+                        <option value="Praggnanandhaa">Praggnanandhaa</option>
+                        <option value="Kateryna Lagno">Kateryna Lagno</option>
+                        <option value="Hou Yifan">Hou Yifan</option>
+                                               
+                    </select>
+                </div>
+                <div id="buttonContainer">
+                    <button id="togglePlayButton">Play</button>
+                </div>
+                <div id="moveEvaluations">
+                    <div id="moveEvaluationsText">
+                        <span>Move</span> |
+                        <span>Time taken</span> |
+                        <span>Your win percentage</span>
+                    </div>
+                    <ul id="evaluationsList">
+                        <!-- Move evaluations will be dynamically added here -->
+                    </ul>
+                    <div id="revertButtonContainer">
+                        <button id="revertMoveButton">&lt;</button>
+                        
+                        <button id="flipButton">Flip</button>
+                        
+                        <button id="moveForwardButton">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Include custom JavaScript file -->
+    <script src="app.js"></script>
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
             text-align: center;
         }
         .dropdown-container select {
